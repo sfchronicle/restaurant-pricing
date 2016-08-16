@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <%= t.include("partials/_head.html") %>
+  </head>
+  <body>
+
+    <responsive-child class="container">
+
+      <div class="outermost">
+        <div class="hed">SF: home to climbing restaurant prices</div>
+        <div class="chatter">The cost of living in the Bay Area has been increasing over the last decade, so it comes as no surprise that restaurant prices are, too. But these prices are buoyed even higher by two factors: San Francisco’s minimum wage, which is well above state levels, and the passage of the San Francisco Health Security Ordinance and the federal Affordable Care Act.</div>
+        <div class="tooltip"></div>
+
+        <div class="button-container" id="buttons">
+          <div class="button price">Price</div>
+          <div class="button priceadj active">Inflation-adjusted</div>
+          <div class="button percent">Percent change</div>
+        </div>
+
+        <div class="mobile-text">Tap on the chart for more detail.</div>
+
+        <div class="legend-container">
+          <div class="legend">Legend</div>
+          <div class="legend-element"><div class="yanksing swatch"></div><div class="key">Yank Sing (Steamed BBQ pork buns)</div></div>
+          <div class="legend-element"><div class="a16 swatch"></div><div class="key">A16 (Margherita pizza)</div></div>
+          <div class="legend-element"><div class="slanted swatch"></div><div class="key">Slanted Door (Shaking beef)</div></div>
+          <div class="legend-element"><div class="greens swatch"></div><div class="key">Greens (Mesquite-grilled brochettes)</div></div>
+          <div class="legend-element"><div class="prime swatch"></div><div class="key">House of Prime Rib (Prime rib cut)</div></div>
+          <div class="legend-element"><div class="zuni swatch"></div><div class="key">Zuni Cafe (Roast chicken for two)</div></div>
+        </div>
+
+        <canvas width=620, height=320, id="cv"></canvas>
+
+        <div class="note"><em>Notes: Menu prices come from the San Francisco Chronicle menu files. Inflation-adjusted prices are calculated with the <a href="http://www.bls.gov/data/inflation_calculator.htm" target="_blank">CPI inflation calculator.</a></em></div>
+        <div class="credit">Emma O'Neill / San Francisco Chronicle</div>
+      </div>
+    </responsive-child>
+
+    <script>
+    <%
+      var years = [1995, 2000, 2005, 2010, 2013, 2015, 2016];
+      var inflation_params = [1.55, 1.38, 1.21, 1.09, 1.02, 1.0, 1.0];
+      var data = {};
+      csv.RestaurantPrices.forEach(function(row) {
+        var obj = {};
+        var prev = 0;
+        years.forEach(function(year, index) {
+          if (row[year] == "") {
+            obj[year] = {
+              price: "empty",
+              priceadj: "empty",
+              percent: "empty"
+            };
+          } else if ((index > 0) && (prev != "empty")) {
+            obj[year] = {
+              price: row[year],
+              priceadj: Math.round(row[year]*inflation_params[index]*100)/100,
+              percent: Math.round((row[year]*inflation_params[index]-prev)/prev*10000)/100
+            };
+          } else {
+            obj[year] = {
+              price: row[year],
+              priceadj: Math.round(row[year]*inflation_params[index]*100)/100,
+              percent: "empty"
+            };
+          }
+          prev = obj[year].priceadj;
+        });
+        data[row.restaurant] = obj;
+      });
+    %>
+    var RestaurantData = <%= JSON.stringify(data) %>
+    console.log(RestaurantData);
+    </script>
+
+    <script src="app.js" async></script>
+    <script src="http://projects.sfchronicle.com/shared/js/pym.min.js"></script>
+    <script>
+      var pymChild = new pym.Child();
+    </script>
+    <%= t.include("partials/_foot.html") %>
+    <%= t.include("partials/_helloSFC.html") %>
+  </body>
+</html>

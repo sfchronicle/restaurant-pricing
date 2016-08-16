@@ -1,0 +1,14 @@
+<div class="year">{{year}}</div>
+
+{{#data}}
+  <div>
+    <div class="swatch" style="background: {{color}}; border: 1px solid {{color}} " ></div>
+    <div class="name" style="display: inline-block">{{name}}</div>
+    <div class="dish" style="display:inline-block">({{dish}})</div>
+    {{#percent}}<span class="percent" style="font-weight: bold; color: black">
+      {{#up}}<span class="arrow up">&#9650;</span>{{/up}}
+      {{#down}}<span class="arrow down">&#9660;</span>{{/down}}
+      {{#same}}<span class="arrow same">&#9724;</span>{{/same}}
+      {{#dollar}}${{/dollar}}{{percent}}{{#perc}}%{{/perc}}{{/percent}}
+  </div>
+{{/data}}

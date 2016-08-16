@@ -1,0 +1,231 @@
+@import "sfchronicle";
+@import "fonts";
+
+@block: "AntennaMedium";
+@body: "AntennaMedium";
+
+@yanksing: #393939;
+@a16: #727272;
+@slanted: #7485AB;
+@greens: #59A3AB;
+@prime: #3F61AB;
+@zuni: #083496;
+
+@button: #B4BFAA;
+
+.outermost {
+  max-width: 620px;
+  font-family: @body;
+}
+
+.outermost {
+  border-top: 1px solid @df-border-gray;
+  border-bottom: 1px solid @df-border-gray;
+  padding: 20px 0;
+}
+
+.hed {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.chatter {
+  font-size: 15px;
+  padding-bottom: 10px;
+  font-family: @body;
+  text-align: center;
+  @media @mobile {
+    padding-bottom: 5px;
+  }
+}
+
+.button-container {
+  text-align: center;
+  .button {
+    display: inline-block;
+    font-size: 14px;
+    float: center;
+    width: 180px;
+    @media @mobile {
+      width: 130px;
+      font-size: 13px;
+    }
+    text-align: center;
+    background: @button;
+    padding: 5px 0;
+    border-radius: 5px;
+    &.active {
+      border: 2px solid black;
+    }
+    @media @mobile {
+      margin-bottom: 5px;
+    }
+    cursor: pointer;
+  }
+  margin: 10px 2px;
+  @media @mobile {
+    margin: 5px 2px;
+  }
+
+}
+
+.mobile-text {
+  display: none;
+  @media @mobile {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 2px;
+  }
+}
+
+.legend-container {
+  width: 400px;
+  left: 120px;
+  border: 2px black solid;
+  font-size: 14px;
+  margin: 1px auto;
+  margin-bottom: 15px;
+  .legend {
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+  }
+  .swatch {
+    &.a16 {
+      background: @a16;
+    }
+    &.greens {
+      background: @greens;
+    }
+    &.prime {
+      background: @prime;
+    }
+    &.slanted {
+      background: @slanted;
+    }
+    &.yanksing {
+      background: @yanksing;
+    }
+    &.zuni {
+      background: @zuni;
+    }
+  }
+  .key {
+    display: inline-block;
+    padding-right: 20px;
+    margin-left: 3px;
+  }
+  background: white;
+  padding: 10px;
+  padding-bottom: 7px;
+  padding-top: 5px;
+  @media @mobile {
+    width: 90%;
+    font-size: 11px;
+  }
+}
+
+.swatch {
+  display: inline-block;
+  text-align: center;
+  content-align: center;
+  font-size: 12px;
+  padding: 0 3px;
+  font-weight: bold;
+  border-radius: 2px;
+  //margin-bottom: 4px;
+  margin-right: 5px;
+  height: 10px;
+  width: 10px;
+  //margin: auto;
+
+  @media @mobile {
+    font-size: 10px;
+    margin-right: 2px;
+  }
+}
+
+canvas {
+  width: 100%;
+}
+
+.tooltip {
+  //position: relative;
+  //top: 233px;
+  //bottom: 420px;
+  left: 110px;
+  width: 400px;
+  border: 2px black solid;
+  display: none;
+  font-size: 14px;
+  position: absolute;
+  background: white;
+  padding-top: 11px;
+  padding-right: 7px;
+  padding-left: 10px;
+  padding-bottom: 7px;
+
+  @media @mobile {
+    display: none;
+    left: 5%;
+    width: 90%;
+    font-size: 11px;
+    top: 520px;
+  }
+
+  &.show {
+    display: block;
+  }
+
+  .percent {
+    color: @df-middle-gray;
+    font-size: 12px;
+
+    @media @mobile {
+      font-size: 10px;
+    }
+  }
+
+  .year {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 4px;
+  }
+}
+
+.arrow {
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  &.up {
+    color: lighten(blue,20%);
+  }
+  &.down {
+    color: lighten(red,20%);
+  }
+  &.same {
+    color: #A5A5A5;
+  }
+
+  @media @mobile {
+    font-size: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+}
+
+.source, .credit, .note {
+  font-size: 11.5px;
+  color: @df-middle-gray;
+}
+
+.source{
+  font-style: italic;
+}
+.credit{
+  text-transform: uppercase;
+  padding-bottom: 20px;
+}
